@@ -1,0 +1,34 @@
+name: Fehler
+description: Etwas Gebautes verhält sich anders als spezifiziert.
+labels: ["bug", "status:planned"]
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: Was ist passiert?
+      description: Beobachtung, keine Deutung. Mit Datum und, wo vorhanden, einer Kennung des Vorgangs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Was hätte passieren sollen?
+      description: >
+        Mit Verweis auf die Stelle, die das sagt. Sagt keine Spezifikation
+        etwas dazu, ist das selbst ein Befund — dann hierhin.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Betroffener Bereich
+      description: Der Wert des Bereichspräfixes dieses Projekts. Zusätzlich als Label setzen.
+    validations:
+      required: false
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Belege
+      description: Logauszug, Dateiname, Screenshot. Behauptungen ohne Quelle sind im Zweifel falsch.
+    validations:
+      required: false

@@ -1,0 +1,48 @@
+name: Aufgabe
+description: Ein Arbeitspaket — konkret genug, dass erkennbar ist, wann es erledigt ist.
+labels: ["status:planned"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Startet auf `status:planned`. Wenn es schon weiter ist, setz das
+        passende `status:`-Label — `status:research`, wenn erst untersucht
+        wird, ob es Sinn ergibt; `status:spec`, wenn die Spezifikation
+        geschrieben wird; `status:dev`, wenn gebaut wird. Immer genau eines.
+  - type: textarea
+    id: what
+    attributes:
+      label: Was ist zu tun?
+      description: Ein Absatz. Wenn es mehrere unabhängige Dinge sind, sind es mehrere Issues.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Zu welchem Bereich gehört das?
+      description: >
+        Der Wert des Bereichspräfixes dieses Projekts — welches es benutzt,
+        steht in der CLAUDE.md. Zusätzlich das Label setzen und das Issue als
+        Sub-Issue an das Tracking-Issue des Bereichs hängen. Gehört es zu
+        keinem Bereich: leer lassen und `infra` setzen.
+    validations:
+      required: false
+  - type: textarea
+    id: done
+    attributes:
+      label: Woran erkennt man, dass es fertig ist?
+      description: >
+        Prüfbar formulieren. Geht es um eine offene Frage: welche Frage die
+        Notiz beantwortet, und womit belegt.
+    validations:
+      required: true
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Blockiert durch
+      description: >
+        Falls etwas im Weg steht — benennen und das Label `blocked` setzen.
+        Das `status:`-Label bleibt dabei stehen und sagt, wo das Ticket
+        stünde, wenn der Blocker fiele.
+    validations:
+      required: false

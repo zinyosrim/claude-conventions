@@ -1,0 +1,28 @@
+name: Idee
+description: Etwas, das aufgeschrieben gehört, bevor es entschieden ist.
+labels: ["status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Bekommt das Label `status:triage`. Hier ist noch kein
+        Abnahmekriterium nötig — das verlangt erst der Wechsel in eine
+        Phase. Von dort wird die Idee zu einer Aufgabe, oder sie wird als
+        „not planned" geschlossen und bekommt `dropped`.
+  - type: textarea
+    id: idea
+    attributes:
+      label: Worum geht es?
+      description: So kurz, wie es sein darf. Ein unfertiger Gedanke ist hier richtig.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Woher kommt das?
+      description: >
+        Beobachtung, Stelle in einem Dokument, Satz eines Nutzers, Zeile in
+        einer Notiz. Wenn es dafür schon eine Quelle gibt, hierhin — sonst
+        leer lassen.
+    validations:
+      required: false

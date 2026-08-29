@@ -1,0 +1,14 @@
+[
+  { "name": "status:triage",   "color": "d9e8f7", "description": "Idee, noch nicht entschieden" },
+  { "name": "status:research", "color": "a8c8ec", "description": "wird untersucht, um zu entscheiden" },
+  { "name": "status:planned",  "color": "7aa8d8", "description": "entschieden, noch nicht begonnen" },
+  { "name": "status:spec",     "color": "4f86c6", "description": "die Spezifikation wird geschrieben" },
+  { "name": "status:dev",      "color": "2c5f9e", "description": "wird gebaut" },
+
+  { "name": "blocked",  "color": "d93f0b", "description": "etwas steht im Weg; der Grund steht im Issue" },
+  { "name": "dropped",  "color": "6a737d", "description": "verworfen, Issue geschlossen als not planned" },
+
+  { "name": "bug",      "color": "d73a4a", "description": "verhaelt sich anders als spezifiziert" },
+  { "name": "infra",    "color": "5319e7", "description": "Repo, Deployment, Werkzeug; gehoert zu keinem Bereich" },
+  { "name": "tracking", "color": "0e8a16", "description": "Sammel-Issue fuer einen Bereich, buendelt Sub-Issues" }
+]
