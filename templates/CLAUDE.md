@@ -64,6 +64,18 @@ erweitern das Layout, sie retten es nicht. Touch-Ziele mindestens 44 px.
   Datenschutz-Link am Formular.
 - **Keine personenbezogenen Daten in Git, Issues oder Logs.**
 
+## Doku
+
+Alles, was kein Code ist, liegt unter `docs/`. Aufbau und Regeln in
+`docs/README.md`. Die wichtigsten:
+
+- **HTML-Artefakte** (Mockups, Prototypen, Berichte) immer nach
+  `docs/artefacts/`, eigenständig, ohne fremde Server, im `index.html`
+  eingetragen.
+- **Specs** nach `docs/specs/<id>.md`, **Entscheidungen** als ADR nach
+  `docs/decisions/`, **Recherche** mit Quelle nach `docs/research/`.
+- Keine Doku-Ordner im Wurzelverzeichnis.
+
 ## Tickets
 
 - **Support (Kunde):** Notion-Datenbank <Name/URL>, bearbeitet nach

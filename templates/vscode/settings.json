@@ -1,0 +1,62 @@
+{
+    // VS Code settings
+    "window.zoomLevel": 0,
+    // Titelleiste je Projekt eigene Farbe, damit man Fenster auseinanderhält.
+    // inactive = dieselbe Farbe, deutlich dunkler; Vordergrund nach Kontrast.
+    "workbench.colorCustomizations": {
+        "titleBar.activeForeground": "#000",
+        "titleBar.inactiveForeground": "#ffffff",
+        "titleBar.activeBackground": "#00d0b1",
+        "titleBar.inactiveBackground": "#006f5e"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.wrangler": true,
+        "**/.astro": true,
+        "**/dist": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "pnpm-lock.yaml": true
+    },
+
+    // Dateien
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    // Formatieren und Linten
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+
+    // Tailwind
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "css.lint.unknownAtRules": "ignore",
+    "tailwindCSS.includeLanguages": {
+        "astro": "html"
+    },
+
+    // Kein Formatieren, wo Umbrüche Inhalt sind
+    "[markdown]": {
+        "editor.formatOnSave": false,
+        "editor.wordWrap": "on"
+    },
+    "[toml]": {
+        "editor.formatOnSave": false
+    },
+
+    // Markdown preview
+    "markdown.mermaid.enabled": true,
+
+    // Live Server zeigt die HTML-Artefakte. Port je Projekt eindeutig,
+    // damit zwei offene Projekte sich nicht in die Quere kommen.
+    "liveServer.settings.port": 5502,
+    "liveServer.settings.root": "/docs/artefacts"
+}
