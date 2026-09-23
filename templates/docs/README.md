@@ -58,7 +58,9 @@ Mockups, Design-Varianten, Klick-Prototypen, Denkstücke, Berichte.
   `<spec-id>-<zusatz>.html`. Was zu keiner Spec gehört:
   `YYYY-MM-DD-thema.html`.
 - **Flach**, keine Unterordner je Thema. Bilder und Screenshots unter
-  `artefacts/assets/`.
+  `artefacts/assets/`. Einzige Ausnahme: ein Artefakt, das aus vielen
+  Dateien besteht (Canvas-Abzug, Pitch-Deck mit Build-Skripten), bekommt
+  einen eigenen Ordner mit `README.md`.
 - **Eigenständig:** CSS und JS in der Datei, keine Anfragen an fremde
   Server. Die Datei muss in fünf Jahren noch genauso aussehen.
 - **`index.html` ist das Verzeichnis.** Jedes Artefakt steht dort mit einem
