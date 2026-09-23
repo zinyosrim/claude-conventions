@@ -55,15 +55,30 @@ Beide:
 
 ```sh
 C=~/Dev/claude-conventions
-mkdir -p .claude/skills .github/ISSUE_TEMPLATE .github/workflows
+mkdir -p .claude/skills .github/ISSUE_TEMPLATE .github/workflows .vscode
 cp -r $C/skills/issue-tracking $C/skills/support-tickets .claude/skills/
 cp $C/templates/ISSUE_TEMPLATE/*.yml .github/ISSUE_TEMPLATE/
 cp $C/templates/deploy.yml .github/workflows/deploy.yml
 cp $C/templates/CLAUDE.md CLAUDE.md
+cp -r $C/templates/docs docs
+cp $C/templates/vscode/*.json .vscode/
 ```
 
 `CLAUDE.md` ausfüllen: Platzhalter ersetzen, die nicht zutreffende
 Stack-Variante löschen. Kein Platzhalter bleibt stehen.
+
+`.vscode/settings.json` anpassen:
+
+- **Titelleiste:** eine Farbe, die noch kein anderes Projekt unter `~/Dev`
+  hat (`grep -h activeBackground ~/Dev/*/.vscode/settings.json`).
+  `inactiveBackground` ist dieselbe Farbe deutlich dunkler;
+  `activeForeground` schwarz oder weiß, je nachdem, was lesbarer ist.
+- **Live-Server-Port:** der nächste freie ab 5502
+  (`grep -h liveServer.settings.port ~/Dev/*/.vscode/settings.json`).
+- Bei einer App den Eintrag `tailwindCSS.includeLanguages` für Astro löschen.
+
+`docs/vision.md` mit dem ersten Satz aus dem Gespräch füllen, den Rest der
+Doku-Vorlagen unverändert lassen.
 
 Label anlegen und Standardlabel löschen wie in der README von
 `claude-conventions`, Schritte 3 und 4.

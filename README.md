@@ -10,6 +10,8 @@ skills/support-tickets/SKILL.md  Kundensupport über Notion (MCP)
 skills/project-setup/SKILL.md    /project-setup — neues Projekt nach Standard-Stack
 templates/CLAUDE.md              Projekt-CLAUDE.md: Stack, de/en, Mobile first, DSGVO
 templates/deploy.yml             GitHub Actions → Cloudflare
+templates/docs/                  docs/-Gerüst: specs, decisions, research, artefacts, …
+templates/vscode/                .vscode/settings.json und extensions.json
 templates/ISSUE_TEMPLATE/        Issue-Formulare für .github/ISSUE_TEMPLATE/
 templates/labels.json            Label mit Farbe und Beschreibung
 ```
@@ -87,6 +89,33 @@ eigen hat. Beispiel:
 Bereichspräfix ist `area:<name>`. Zusätzliche Phase: `status:review` — wartet
 auf Freigabe durch den Kunden.
 ```
+
+## Bestehende Projekte auf `docs/` umziehen
+
+Die Ordnung in `templates/docs/README.md` ist aus drei Projekten
+zusammengezogen, die jedes eine andere hatten. Beim Umzug gilt:
+Verschieben mit `git mv`, damit die Historie bleibt, und Verweise im selben
+Commit nachziehen.
+
+| Heute | Wohin |
+|---|---|
+| sailloop `specs/`, `decisions/`, `research/` im Wurzelverzeichnis | `docs/specs/`, `docs/decisions/`, `docs/research/` |
+| sailloop `artefacts/` | `docs/artefacts/` |
+| sailloop `architecture/architektur.md`, `specs/vision.md` | `docs/architecture.md`, `docs/vision.md` |
+| sailloop `src/brand/`, `artefacts/brandbook.html` | `docs/brand/`, `docs/artefacts/brandbook.html` |
+| sailranker `ARCHITECTURE.md` im Wurzelverzeichnis | `docs/architecture.md` |
+| sailranker `docs/NN-thema.md` (nummeriert) | je nach Inhalt `docs/specs/<id>.md` oder `docs/decisions/NNNN-….md` |
+| sailranker `docs/review/*.html`, `docs/pitch/` | `docs/artefacts/`, Bilder nach `docs/artefacts/assets/` |
+| windstation `docs/decisions.md` (eine Datei) | je Entscheidung eine ADR in `docs/decisions/` |
+| windstation `design/` | Quelldateien nach `docs/brand/`, Entwürfe nach `docs/artefacts/` |
+| fsys `architecture/` | `docs/architecture.md`, Pläne nach `docs/specs/`, ADRs nach `docs/decisions/` |
+| fsys `product/prototypes/`, `product/design-system/` | `docs/artefacts/`, `docs/brand/` |
+| fsys `domain/`, `norming/` | `docs/research/` |
+| fsys `reference/` | `docs/runbooks/` |
+| fsys `client-materials/` | `docs/client/` |
+
+fsys ist ein eigenes Doku-Repo neben drei Code-Repos. Dort liegt `docs/`
+im Doku-Repo, nicht in jedem Code-Repo.
 
 ## Was hierher gehört und was nicht
 
