@@ -15,13 +15,18 @@ klonen.
 
 Nur das, was sich nicht ableiten lässt, in einer Frage:
 
-- **Name** (wird Repo-, Ordner- und Worker-Name, kebab-case)
+- **Name** (wird Repo-, Ordner- und Worker-Name, kebab-case) — entfällt, wenn der aktuelle Ordner es schon sagt, siehe 2.
 - **Art:** Website (Astro) oder App (Vite + Preact + Worker-API)
 - **Domain**
 - **Notion-Datenbank** für Support, falls schon vorhanden
 - **Bereichspräfix** für Tickets (`area:` ist der Standard)
 
 ## 2. Repo
+
+Läuft Claude schon in einem leeren Ordner unter `~/Dev`, ist das der
+Projektordner und sein Name der Projektname — dann nicht danach fragen.
+Sonst den Ordner anlegen. Ist der Ordner nicht leer oder schon ein
+Git-Repo, anhalten und nachfragen.
 
 ```sh
 mkdir -p ~/Dev/<name> && cd ~/Dev/<name>
