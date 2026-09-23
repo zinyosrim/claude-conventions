@@ -6,17 +6,36 @@ kopiert und dort eingecheckt.
 
 ```
 skills/issue-tracking/SKILL.md   das Verfahren — wie Tickets geführt werden
+skills/support-tickets/SKILL.md  Kundensupport über Notion (MCP)
+skills/project-setup/SKILL.md    /project-setup — neues Projekt nach Standard-Stack
+templates/CLAUDE.md              Projekt-CLAUDE.md: Stack, de/en, Mobile first, DSGVO
+templates/deploy.yml             GitHub Actions → Cloudflare
 templates/ISSUE_TEMPLATE/        Issue-Formulare für .github/ISSUE_TEMPLATE/
 templates/labels.json            Label mit Farbe und Beschreibung
 ```
 
-## Ein Projekt aufsetzen
+## Schnellweg: `/project-setup`
+
+Einmalig auf dem Rechner:
+
+```sh
+git clone https://github.com/zinyosrim/claude-conventions ~/Dev/claude-conventions
+mkdir -p ~/.claude/skills
+ln -s ~/Dev/claude-conventions/skills/project-setup ~/.claude/skills/project-setup
+```
+
+Danach in Claude Code `/project-setup` aufrufen. Der Skill erledigt die
+Schritte unten und zusätzlich Gerüst, `CLAUDE.md`, Deploy, GitHub Project
+und die Cloudflare-Anbindung. Er liegt nur global, weil er einmal pro Projekt
+läuft; alles, was das Projekt danach braucht, wird eingecheckt.
+
+## Ein Projekt von Hand aufsetzen
 
 **1. Skill kopieren**
 
 ```sh
 mkdir -p <projekt>/.claude/skills
-cp -r skills/issue-tracking <projekt>/.claude/skills/
+cp -r skills/issue-tracking skills/support-tickets <projekt>/.claude/skills/
 ```
 
 Der Skill wird geladen, wenn es um Tickets geht — er muss nicht aufgerufen
