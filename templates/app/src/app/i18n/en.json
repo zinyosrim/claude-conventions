@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "__TITLE__",
+    "tagline": "__TAGLINE__"
+  },
+  "home": {
+    "status": "Under construction",
+    "intro": "__INTRO__"
+  },
+  "footer": {
+    "imprint": "Legal Notice",
+    "privacy": "Privacy",
+    "language": "Language"
+  }
+}

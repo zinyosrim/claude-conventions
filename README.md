@@ -14,6 +14,9 @@ templates/docs/                  docs/-Gerüst: specs, decisions, research, arte
 templates/vscode/                .vscode/settings.json und extensions.json
 templates/ISSUE_TEMPLATE/        Issue-Formulare für .github/ISSUE_TEMPLATE/
 templates/labels.json            Label mit Farbe und Beschreibung
+templates/app/                   App-Gerüst (Vite + Preact + Worker), mit __PLATZHALTERN__
+templates/legal/                 Impressum und Datenschutz (Dual Citizen), de/en
+scripts/new-project.sh           die festen Schritte von /project-setup in einem Lauf
 ```
 
 ## Schnellweg: `/project-setup`
@@ -23,12 +26,22 @@ Einmalig auf dem Rechner:
 ```sh
 git clone https://github.com/zinyosrim/claude-conventions ~/Dev/claude-conventions
 mkdir -p ~/.claude/skills
-ln -s ~/Dev/claude-conventions/skills/project-setup ~/.claude/skills/project-setup
+ln -sfn ~/Dev/claude-conventions/skills/project-setup ~/.claude/skills/project-setup
 ```
 
-Danach in Claude Code `/project-setup` aufrufen. Der Skill erledigt die
-Schritte unten und zusätzlich Gerüst, `CLAUDE.md`, Deploy, GitHub Project
-und die Cloudflare-Anbindung. Er liegt nur global, weil er einmal pro Projekt
+`-sfn`, damit ein zweiter Aufruf den Link ersetzt, statt einen Link im
+Skill-Ordner anzulegen. Dazu einmal der Cloudflare-Token für alle Projekte im
+Schlüsselbund — wie er angelegt wird, steht im Skill unter 4:
+
+```sh
+security add-generic-password -a "$USER" -s cloudflare-workers-token -w
+```
+
+Danach in Claude Code `/project-setup` aufrufen. Der Skill ruft
+`scripts/new-project.sh` für die Schritte unten und zusätzlich Gerüst,
+Deploy, GitHub Project und Account-ID; er füllt `CLAUDE.md` und Texte und
+sagt die Cloudflare-Schritte an. Das Skript lässt sich mit `OFFLINE=1` und
+`PROJECT_DIR=/tmp/probe` ohne GitHub und Cloudflare ausprobieren. Er liegt nur global, weil er einmal pro Projekt
 läuft; alles, was das Projekt danach braucht, wird eingecheckt.
 
 ## Ein Projekt von Hand aufsetzen
@@ -69,12 +82,12 @@ Issues → Labels von Hand anlegen — es sind zehn.
 
 ```sh
 for l in documentation duplicate enhancement "good first issue" \
-         "help wanted" invalid question wontfix; do
+         "help wanted" invalid question wontfix accessibility; do
   gh label delete "$l" --yes
 done
 ```
 
-`bug` bleibt. `wontfix` sagt dasselbe wie `dropped` — zwei Wege für dieselbe
+`bug` bleibt. `accessibility` legt GitHub neuerdings mit an. `wontfix` sagt dasselbe wie `dropped` — zwei Wege für dieselbe
 Sache sind einer zu viel.
 
 **5. Bereichspräfix festlegen**

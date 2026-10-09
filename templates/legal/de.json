@@ -1,0 +1,72 @@
+{
+  "legal": {
+    "back": "Zurück",
+    "bindingNote": "",
+    "imprint": {
+      "title": "Impressum",
+      "intro": "Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz):",
+      "sections": [
+        {
+          "h": "Anbieter",
+          "lines": [
+            "Dual Citizen",
+            "vertreten durch die Geschäftsleitung Deniz Demirsoy",
+            "Rothmundstr. 5",
+            "80337 München",
+            "Deutschland"
+          ]
+        },
+        {
+          "h": "Kontakt",
+          "lines": [
+            "Telefon: +49 (89) 535002",
+            "E-Mail: hello@dualcitizen.de"
+          ]
+        },
+        {
+          "h": "Umsatzsteuer-Identifikationsnummer",
+          "lines": [
+            "USt.-Id.: DE26702424225"
+          ]
+        },
+        {
+          "h": "Verantwortlich für den Inhalt",
+          "lines": [
+            "Deniz Demirsoy, Anschrift wie oben."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Datenschutz",
+      "intro": "Diese Erklärung gilt für die Web-App __TITLE__.",
+      "sections": [
+        {
+          "h": "Verantwortlicher",
+          "lines": [
+            "Dual Citizen, vertreten durch Deniz Demirsoy, Rothmundstr. 5, 80337 München.",
+            "E-Mail: hello@dualcitizen.de · Telefon: +49 (89) 535002"
+          ]
+        },
+        {
+          "h": "Diese App",
+          "lines": [
+            "Die App setzt keine Cookies, verwendet keine Werbung und kein Tracking. In deinem Browser merkt sie sich nur die gewählte Sprache."
+          ]
+        },
+        {
+          "h": "Hosting",
+          "lines": [
+            "Gehostet bei der Cloudflare, Inc. auf deren Edge-Plattform. Beim Aufruf werden technisch notwendige Server-Logs (inkl. gekürzter IP) verarbeitet. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an sicherem Betrieb)."
+          ]
+        },
+        {
+          "h": "Deine Rechte",
+          "lines": [
+            "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung und Widerspruch (Art. 15–21 DSGVO) sowie ein Beschwerderecht bei einer Aufsichtsbehörde. Kontakt: siehe Impressum."
+          ]
+        }
+      ]
+    }
+  }
+}

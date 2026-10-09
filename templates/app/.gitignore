@@ -1,0 +1,22 @@
+node_modules/
+dist/
+dev-dist/
+.wrangler/
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+*.tsbuildinfo
+
+# macOS
+.DS_Store
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# misc
+coverage/
+*.log
