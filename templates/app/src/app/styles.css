@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+
+/* Vorläufige Farben, bis es ein Brandbook gibt (docs/brand/). Dunkel folgt dem System.
+   Schrift: Systemschrift — keine Anfrage an fremde Server. */
+:root {
+  --c-bg: #ffffff;
+  --c-surface: #f4f5f7;
+  --c-text: #0d1117;
+  --c-muted: #555d68;
+  --c-accent: #1f5fbf;
+  --c-on-accent: #ffffff;
+  --c-line: #dde1e6;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #0d1117;
+    --c-surface: #161b22;
+    --c-text: #f0f3f6;
+    --c-muted: #9aa4af;
+    --c-accent: #6ea8ff;
+    --c-on-accent: #0d1117;
+    --c-line: #2a313a;
+  }
+}
+
+@theme inline {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-accent: var(--c-accent);
+  --color-on-accent: var(--c-on-accent);
+  --color-line: var(--c-line);
+}
+
+html {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  margin: 0;
+}

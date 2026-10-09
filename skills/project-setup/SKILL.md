@@ -11,120 +11,126 @@ und die Konventionen aus `claude-conventions` mitbringt. Die Konventionen
 liegen lokal unter `~/Dev/claude-conventions`; fehlt der Ordner, erst
 klonen.
 
+Die festen Schritte macht `scripts/new-project.sh`. Der Skill fragt, ruft das
+Skript, füllt, was Urteil braucht, und begleitet die Schritte, die nur der
+Nutzer machen kann.
+
+## 0. Vorbedingungen prüfen
+
+Vor der Frage an den Nutzer, damit alles Fehlende in einem Rutsch kommt:
+
+- `gh auth status` muss den Scope `project` zeigen. Sonst den Nutzer bitten,
+  `gh auth refresh -s project` auszuführen: Enter, Code im Browser eingeben,
+  „Authorize“. Im Terminal-Bereich der Claude-App wartet `gh` an der ersten
+  Frage auf Enter — darauf hinweisen.
+- `security find-generic-password -s cloudflare-workers-token` (ohne `-w`,
+  also ohne den Wert zu lesen) zeigt, ob der Cloudflare-Token im Schlüsselbund
+  liegt. Fehlt er, siehe 4.
+- **Dateien aus `~/Downloads`** kann die Claude-App nicht lesen; macOS sperrt
+  den Ordner, und eine Freigabe für die Sitzung hilft nicht. Den Nutzer bitten,
+  Unterlagen nach `~/Dev` zu ziehen oder in den Chat zu kopieren. Nicht zu
+  „Festplattenvollzugriff“ raten.
+
 ## 1. Erfragen
 
 Nur das, was sich nicht ableiten lässt, in einer Frage:
 
-- **Name** (wird Repo-, Ordner- und Worker-Name, kebab-case) — entfällt, wenn der aktuelle Ordner es schon sagt, siehe 2.
-- **Art:** Website (Astro) oder App (Vite + Preact + Worker-API)
-- **Domain**
+- **Name** (wird Repo-, Ordner- und Worker-Name, kebab-case) und Anzeigename
+- **Art:** Website (Astro) oder App (Vite + Preact + Worker-API) — aus einem
+  Briefing meist ableitbar, dann nicht fragen, sondern nennen
+- **Domain** — „noch keine“ ist eine gültige Antwort
 - **Notion-Datenbank** für Support, falls schon vorhanden
-- **Bereichspräfix** für Tickets (`area:` ist der Standard)
+- **Rechtstexte:** Anbieterangaben aus `templates/legal/` (Dual Citizen)
+  oder andere
 
-## 2. Repo
+`area:` ist das Bereichspräfix, solange der Nutzer nichts anderes sagt.
 
-Läuft Claude schon in einem leeren Ordner unter `~/Dev`, ist das der
-Projektordner und sein Name der Projektname — dann nicht danach fragen.
-Sonst den Ordner anlegen. Ist der Ordner nicht leer oder schon ein
-Git-Repo, anhalten und nachfragen.
+## 2. Skript
 
 ```sh
-mkdir -p ~/Dev/<name> && cd ~/Dev/<name>
-git init -b main
-gh repo create zinyosrim/<name> --private --source . --remote origin
+~/Dev/claude-conventions/scripts/new-project.sh <name> "<Anzeigename>" <app|website> [domain]
 ```
 
-## 3. Gerüst
+Es bricht ab, bevor es etwas anlegt, wenn der Ordner nicht leer ist, das Repo
+existiert oder ein Werkzeug fehlt. Es legt an: Ordner, Git, privates Repo,
+Gerüst, Konventionen (Skills, Issue-Vorlagen, Deploy, `CLAUDE.md`, `docs/`,
+`.vscode/` mit freier Farbe und freiem Port), Label, GitHub Project
+(verknüpft, Nummer in der `CLAUDE.md`), Secret `CLOUDFLARE_ACCOUNT_ID`.
+Bei einer App zusätzlich: Impressum und Datenschutz mit den Texten aus
+`templates/legal/`, Test, Build, Playwright-Chromium. Ohne Domain läuft das
+Projekt unter `<name>.zinyosrim.workers.dev` mit `noindex`.
 
-- **Website:** `pnpm create astro@latest . -- --template minimal --typescript strict`,
-  dann Tailwind und in `astro.config.mjs` `i18n: { defaultLocale: "de", locales: ["de", "en"] }`.
-  Seiten unter `src/pages/` (de) und `src/pages/en/`.
-- **App:** Vite + Preact + Tailwind + `vite-plugin-pwa`. Worker unter
-  `src/worker/`, Frontend unter `src/app/`, Texte unter `src/app/i18n/de.json`
-  und `en.json`. Vorbild: `windstation`.
+Zum Schluss listet es alles, was noch offen ist. Das ist die Liste für 3.
 
-Beide:
+## 3. Füllen
 
-- `wrangler.toml` mit `name`, `compatibility_date` von heute, `[assets]`
-  und `routes = [{ pattern = "<domain>", custom_domain = true }]`.
-  Bei einer App zusätzlich `main` und, wenn Daten nötig sind, eine D1-Datenbank
-  (`wrangler d1 create <name>`).
-- Test, der prüft, dass `de` und `en` dieselben Schlüssel haben.
-- Seiten **Impressum** und **Datenschutz** in beiden Sprachen, im Footer
-  verlinkt. Inhalt mit dem Nutzer klären; nichts erfinden, was eine
-  Rechtsaussage ist.
-- Playwright-Konfiguration mit mobilem Viewport (390 px) als erstem Projekt.
-- Scripts `dev`, `build`, `test`, `test:e2e` in `package.json`.
+- **Platzhalter** `__TAGLINE__`, `__INTRO__` (App) in beiden Sprachen — aus dem
+  Gespräch oder Briefing, nichts erfinden.
+- **`CLAUDE.md`:** jeden `<…>`-Platzhalter ersetzen, die nicht zutreffende
+  Stack-Variante löschen, Projekteigenes unter „Eigenheiten“. Kein Platzhalter
+  bleibt stehen.
+- **`docs/vision.md`** mit dem ersten Satz aus dem Gespräch, den Rest der
+  Doku-Vorlagen unverändert lassen. Mitgebrachte Unterlagen nach
+  `docs/README.md` einordnen (ein Briefing ohne Abnahmekriterien ist
+  `research/`, keine Spec).
+- **Website:** Tailwind ist eingebunden; dazu `i18n: { defaultLocale: "de",
+  locales: ["de", "en"] }` in `astro.config.mjs`, Seiten unter `src/pages/`
+  und `src/pages/en/`, Impressum und Datenschutz aus `templates/legal/`,
+  Test auf gleiche Schlüssel, Playwright mit 390 px als erstem Projekt,
+  `wrangler.toml` wie in `templates/app/`.
+- **Rechtstexte** anders als Dual Citizen: Inhalt mit dem Nutzer klären;
+  nichts erfinden, was eine Rechtsaussage ist.
+- **D1** erst mit dem ersten Datenmodell (`wrangler d1 create <name>`).
 
-## 4. Konventionen übernehmen
+Danach `pnpm lint`, `pnpm test`, `pnpm test:e2e`, `pnpm build`.
+
+## 4. Cloudflare — macht der Nutzer
+
+Claude sagt an und wartet; Tokens trägt Claude nie selbst ein.
+
+**Token**, einmal für alle Projekte: dash.cloudflare.com/profile/api-tokens →
+Vorlage „Edit Cloudflare Workers“, dazu **D1: Edit**; Account Resources: der
+Account; Zone Resources: **All zones from an account**. Dann im Schlüsselbund
+speichern (fragt nach dem Wert):
 
 ```sh
-C=~/Dev/claude-conventions
-mkdir -p .claude/skills .github/ISSUE_TEMPLATE .github/workflows .vscode
-cp -r $C/skills/issue-tracking $C/skills/support-tickets .claude/skills/
-cp $C/templates/ISSUE_TEMPLATE/*.yml .github/ISSUE_TEMPLATE/
-cp $C/templates/deploy.yml .github/workflows/deploy.yml
-cp $C/templates/CLAUDE.md CLAUDE.md
-cp -r $C/templates/docs docs
-cp $C/templates/vscode/*.json .vscode/
+security add-generic-password -a "$USER" -s cloudflare-workers-token -w
 ```
 
-`CLAUDE.md` ausfüllen: Platzhalter ersetzen, die nicht zutreffende
-Stack-Variante löschen. Kein Platzhalter bleibt stehen.
-
-`.vscode/settings.json` anpassen:
-
-- **Titelleiste:** eine Farbe, die noch kein anderes Projekt unter `~/Dev`
-  hat (`grep -h activeBackground ~/Dev/*/.vscode/settings.json`).
-  `inactiveBackground` ist dieselbe Farbe deutlich dunkler;
-  `activeForeground` schwarz oder weiß, je nachdem, was lesbarer ist.
-- **Live-Server-Port:** der nächste freie ab 5502
-  (`grep -h liveServer.settings.port ~/Dev/*/.vscode/settings.json`).
-- Bei einer App den Eintrag `tailwindCSS.includeLanguages` für Astro löschen.
-
-`docs/vision.md` mit dem ersten Satz aus dem Gespräch füllen, den Rest der
-Doku-Vorlagen unverändert lassen.
-
-Label anlegen und Standardlabel löschen wie in der README von
-`claude-conventions`, Schritte 3 und 4.
-
-## 5. GitHub Project
+Je Projekt setzt der Nutzer ihn mit einem Befehl, den das Skript ausgibt:
 
 ```sh
-gh project create --owner zinyosrim --title "<Name>"
-gh project link <nummer> --owner zinyosrim --repo zinyosrim/<name>
+gh secret set CLOUDFLARE_API_TOKEN --repo zinyosrim/<name> --body "$(security find-generic-password -s cloudflare-workers-token -w)"
 ```
 
-Nummer und URL in die `CLAUDE.md`.
-
-## 6. Cloudflare und Domain
-
-Diese Schritte macht der Nutzer; Claude sagt sie an und wartet:
-
-1. **Domain bei Cloudflare hinzufügen** (Free-Plan). Cloudflare nennt zwei
+**Domain**, falls es eine gibt:
+1. Domain bei Cloudflare hinzufügen (Free-Plan); Cloudflare nennt zwei
    Nameserver.
-2. **Bei Spaceship** die Nameserver der Domain auf diese beiden umstellen.
-   Spaceship bleibt Registrar, DNS lebt ab jetzt bei Cloudflare.
-3. **API-Token** anlegen (Vorlage „Edit Cloudflare Workers“) und zusammen mit
-   der Account-ID als Repo-Secret setzen:
-   ```sh
-   gh secret set CLOUDFLARE_API_TOKEN
-   gh secret set CLOUDFLARE_ACCOUNT_ID
-   ```
+2. Bei Spaceship die Nameserver darauf umstellen. Spaceship bleibt
+   Registrar, DNS lebt ab jetzt bei Cloudflare.
 
-## 7. Erster Deploy
+## 5. Erster Deploy
 
-Committen, pushen, den Deploy-Lauf abwarten
-(`gh run watch`), dann die Domain auf dem Handy-Viewport öffnen und beide
-Sprachen prüfen. Erst dann ist das Projekt aufgesetzt.
+Committen, pushen, den Deploy-Lauf abwarten (`gh run watch`), dann die
+Adresse im Browser-Bereich bei 390 px öffnen und beide Sprachen prüfen,
+Impressum und Datenschutz eingeschlossen. Erst dann ist das Projekt
+aufgesetzt.
 
-## 8. Notion prüfen
+## 6. Notion prüfen
 
-Ist der Notion-MCP-Server verbunden, die Support-Datenbank einmal lesen und
-bestätigen, dass die Felder aus `support-tickets` vorhanden sind. Fehlende
-Felder dem Nutzer nennen, nicht selbst anlegen.
+Ist der Notion-MCP-Server verbunden und gibt es eine Support-Datenbank, sie
+einmal lesen und bestätigen, dass die Felder aus `support-tickets` vorhanden
+sind. Fehlende Felder dem Nutzer nennen, nicht selbst anlegen.
 
 ## Abschluss
 
-In drei Zeilen berichten: URL, Repo, was offen ist (fehlende Rechtstexte,
-Nameserver noch nicht umgestellt, Notion nicht verbunden).
+In drei Zeilen berichten: URL, Repo, was offen ist (Domain, Rechtstexte,
+Notion).
+
+## Wenn etwas hakt
+
+- `gh project create` scheitert in gh 2.87 an einem GraphQL-Fehler — das
+  Skript nimmt deshalb die Mutation `createProjectV2` direkt.
+- TypeScript bleibt bei der neuesten Version, die `typescript-eslint`
+  unterstützt (Stand Oktober 2026: 6.0, nicht 7).
+- Fehlen Playwright-Browser nach einem Update: `pnpm exec playwright install chromium`.

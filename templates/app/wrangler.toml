@@ -1,0 +1,19 @@
+# Cloudflare Worker: liefert die PWA aus (Static Assets) und beantwortet /api/*.
+# Ein Repo, ein Worker, ein Deploy.
+name = "__NAME__"
+main = "src/worker/index.ts"
+compatibility_date = "__DATE__"
+workers_dev = true
+
+# Noch keine eigene Domain: die App läuft vorerst unter __NAME__.__WORKERS_SUBDOMAIN__.workers.dev.
+# Mit Domain hier eintragen (und workers_dev auf false setzen, wenn nur sie gelten soll):
+# routes = [{ pattern = "<domain>", custom_domain = true }]
+
+[observability]
+enabled = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]

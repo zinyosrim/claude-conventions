@@ -1,0 +1,72 @@
+{
+  "legal": {
+    "back": "Back",
+    "bindingNote": "The German version is the legally binding one.",
+    "imprint": {
+      "title": "Legal Notice",
+      "intro": "Information required under § 5 DDG (German Digital Services Act).",
+      "sections": [
+        {
+          "h": "Provider",
+          "lines": [
+            "Dual Citizen",
+            "represented by its managing director Deniz Demirsoy",
+            "Rothmundstr. 5",
+            "80337 Munich",
+            "Germany"
+          ]
+        },
+        {
+          "h": "Contact",
+          "lines": [
+            "Phone: +49 (89) 535002",
+            "E-mail: hello@dualcitizen.de"
+          ]
+        },
+        {
+          "h": "VAT ID",
+          "lines": [
+            "DE26702424225"
+          ]
+        },
+        {
+          "h": "Responsible for content",
+          "lines": [
+            "Deniz Demirsoy, address as above."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "title": "Privacy",
+      "intro": "This notice covers the web app __TITLE__.",
+      "sections": [
+        {
+          "h": "Controller",
+          "lines": [
+            "Dual Citizen, represented by Deniz Demirsoy, Rothmundstr. 5, 80337 Munich, Germany.",
+            "E-mail: hello@dualcitizen.de · Phone: +49 (89) 535002"
+          ]
+        },
+        {
+          "h": "This app",
+          "lines": [
+            "The app sets no cookies, carries no ads and does no tracking. In your browser it only remembers the language you chose."
+          ]
+        },
+        {
+          "h": "Hosting",
+          "lines": [
+            "Hosted by Cloudflare, Inc. on its edge platform. Technically necessary server logs (including truncated IP) are processed. Legal basis: Art. 6(1)(f) GDPR."
+          ]
+        },
+        {
+          "h": "Your rights",
+          "lines": [
+            "You have the right to access, rectification, erasure, restriction and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a supervisory authority. Contact: see Legal Notice."
+          ]
+        }
+      ]
+    }
+  }
+}

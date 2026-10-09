@@ -1,0 +1,5 @@
+# Cloudflare-Header für die Static Assets (wird nicht als Datei ausgeliefert).
+# Solange die App im Aufbau ist und nur unter workers.dev läuft, bleibt sie aus
+# Suchmaschinen heraus. Mit eigener Domain überdenken.
+/*
+  X-Robots-Tag: noindex
