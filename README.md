@@ -8,6 +8,7 @@ kopiert und dort eingecheckt.
 skills/issue-tracking/SKILL.md   das Verfahren — wie Tickets geführt werden
 skills/support-tickets/SKILL.md  Kundensupport über Notion (MCP)
 skills/project-setup/SKILL.md    /project-setup — neues Projekt nach Standard-Stack
+skills/design-richtungen/        Designrichtungen auf einem Canvas, in Runden zur Entscheidung; Briefing in references/
 templates/CLAUDE.md              Projekt-CLAUDE.md: Stack, de/en, Mobile first, DSGVO
 templates/deploy.yml             GitHub Actions → Cloudflare
 templates/docs/                  docs/-Gerüst: specs, decisions, research, artefacts, …
@@ -27,6 +28,7 @@ Einmalig auf dem Rechner:
 git clone https://github.com/zinyosrim/claude-conventions ~/Dev/claude-conventions
 mkdir -p ~/.claude/skills
 ln -sfn ~/Dev/claude-conventions/skills/project-setup ~/.claude/skills/project-setup
+ln -sfn ~/Dev/claude-conventions/skills/design-richtungen ~/.claude/skills/design-richtungen
 ```
 
 `-sfn`, damit ein zweiter Aufruf den Link ersetzt, statt einen Link im
