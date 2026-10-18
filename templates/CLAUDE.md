@@ -32,6 +32,16 @@ Gemeinsam für beide Varianten:
   ein Worker, ein Deploy.
 - **Daten:** D1. <Falls MySQL: über Hyperdrive, Anbieter und Grund hier nennen.>
 
+## Code
+
+**Code englisch, Dokumente deutsch.** In jeder Codedatei ist alles englisch:
+Bezeichner (Variablen, Funktionen, Typen, Dateien, Tabellen und Spalten,
+JSON-Schlüssel, Werte technischer Aufzählungen), Kommentare, Testnamen,
+URL-Slugs und API-Pfade. Deutsch bleiben Dokumente unter `docs/` und die Texte,
+die Nutzer lesen (in `de.json` / `en.json`). Keine Umlaute in Bezeichnern.
+Fachbegriffe stehen mit ihrem englischen Namen im Glossar in
+`docs/architecture.md`.
+
 ## Sprachen
 
 **Deutsch und Englisch, Deutsch ist Standard.** Jeder sichtbare Text existiert
