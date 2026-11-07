@@ -28,6 +28,13 @@ Gemeinsam für beide Varianten:
 
 - **Vite + Preact**, PWA (`vite-plugin-pwa`). React nur, wenn eine
   Bibliothek es erzwingt — dann hier begründen.
+- **PWA-Updates:** Die App vom Home-Bildschirm wird meist aus dem Hintergrund
+  geholt, ohne Seitenaufruf; ohne eigene Prüfung läuft alter Code tagelang
+  weiter. Der Build schreibt `/version.json` (Kennung = die gehashten JS- und
+  CSS-Dateien, `src/shared/version.ts`, Plugin in `vite.config.ts`), die App
+  fragt sie bei jeder Rückkehr in den Vordergrund ab (`src/app/lib/update.ts`):
+  nach 15 Minuten weg und ohne Eingabe still neu laden, sonst Hinweis
+  „Neu laden“. `index.html` nie vorhalten (NetworkFirst).
 - **API im selben Worker** (`src/worker/`), Frontend in `src/app/`. Ein Repo,
   ein Worker, ein Deploy.
 - **Daten:** D1. <Falls MySQL: über Hyperdrive, Anbieter und Grund hier nennen.>
