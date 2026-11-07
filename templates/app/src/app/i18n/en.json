@@ -11,5 +11,10 @@
     "imprint": "Legal Notice",
     "privacy": "Privacy",
     "language": "Language"
+  },
+  "update": {
+    "text": "A new version of the app is ready.",
+    "reload": "Reload",
+    "later": "Later"
   }
 }

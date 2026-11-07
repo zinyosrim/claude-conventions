@@ -1,6 +1,7 @@
 import { type ComponentChildren } from 'preact';
 import { dict, lang, setLang, type Lang } from '../i18n/index.js';
 import { navigate, pathFor, type Route } from '../lib/router.js';
+import { updateReady } from '../lib/update.js';
 
 /** Ein Link innerhalb der App: echte Adresse, aber ohne Neuladen. */
 export function AppLink({
@@ -70,6 +71,38 @@ export function Shell({ children }: { children: ComponentChildren }) {
       </header>
       <main class="mx-auto flex w-full max-w-2xl flex-col gap-4 px-4 py-4">{children}</main>
       <Footer />
+      <UpdateNotice />
+    </div>
+  );
+}
+
+/**
+ * „Es gibt eine neue Version“ (lib/update.ts): eine Karte über dem unteren Rand; „Neu laden“
+ * lädt den neuen Build, „Später“ blendet sie bis zum nächsten Start aus.
+ */
+function UpdateNotice() {
+  if (!updateReady.value) return null;
+  const u = dict.value.update;
+  return (
+    <div
+      role="status"
+      class="fixed inset-x-4 bottom-[calc(24px+env(safe-area-inset-bottom))] z-40 mx-auto flex max-w-md items-center gap-2 rounded-lg border border-line bg-surface py-1.5 pr-1.5 pl-4 text-[15px] text-ink shadow-lg"
+    >
+      <span class="min-w-0 flex-1">{u.text}</span>
+      <button
+        type="button"
+        class="min-h-11 shrink-0 px-2 font-semibold text-muted"
+        onClick={() => (updateReady.value = false)}
+      >
+        {u.later}
+      </button>
+      <button
+        type="button"
+        class="min-h-11 shrink-0 px-2 font-bold text-accent"
+        onClick={() => location.reload()}
+      >
+        {u.reload}
+      </button>
     </div>
   );
 }

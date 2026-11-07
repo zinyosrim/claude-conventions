@@ -11,5 +11,10 @@
     "imprint": "Impressum",
     "privacy": "Datenschutz",
     "language": "Sprache"
+  },
+  "update": {
+    "text": "Es gibt eine neue Version der App.",
+    "reload": "Neu laden",
+    "later": "Später"
   }
 }

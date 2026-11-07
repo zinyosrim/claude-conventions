@@ -57,7 +57,10 @@ Gerüst, Konventionen (Skills, Issue-Vorlagen, Deploy, `CLAUDE.md`, `docs/`,
 `.vscode/` mit freier Farbe und freiem Port), Label, GitHub Project
 (verknüpft, Nummer in der `CLAUDE.md`), Secret `CLOUDFLARE_ACCOUNT_ID`.
 Bei einer App zusätzlich: Impressum und Datenschutz mit den Texten aus
-`templates/legal/`, Test, Build, Playwright-Chromium. Ohne Domain läuft das
+`templates/legal/`, Test, Build, Playwright-Chromium, und die Update-Prüfung
+der PWA (`/version.json`, `src/app/lib/update.ts`, Hinweis „Neu laden“): Die
+installierte App wird am iPhone aus dem Hintergrund geholt, ohne Seitenaufruf,
+und bliebe ohne sie auf altem Stand. Nicht entfernen. Ohne Domain läuft das
 Projekt unter `<name>.zinyosrim.workers.dev` mit `noindex`.
 
 Zum Schluss listet es alles, was noch offen ist. Das ist die Liste für 3.
@@ -113,7 +116,8 @@ gh secret set CLOUDFLARE_API_TOKEN --repo zinyosrim/<name> --body "$(security fi
 
 Committen, pushen, den Deploy-Lauf abwarten (`gh run watch`), dann die
 Adresse im Browser-Bereich bei 390 px öffnen und beide Sprachen prüfen,
-Impressum und Datenschutz eingeschlossen. Erst dann ist das Projekt
+Impressum und Datenschutz eingeschlossen. Bei einer App: `/version.json` liefert eine
+Kennung mit `/assets/…`-Dateien. Erst dann ist das Projekt
 aufgesetzt.
 
 ## 6. Notion prüfen
@@ -134,3 +138,7 @@ Notion).
 - TypeScript bleibt bei der neuesten Version, die `typescript-eslint`
   unterstützt (Stand Oktober 2026: 6.0, nicht 7).
 - Fehlen Playwright-Browser nach einem Update: `pnpm exec playwright install chromium`.
+- **Installierte App zeigt alten Stand** nach einem Deploy: Prüfen, ob
+  `/version.json` ausgeliefert wird und `watchForUpdates()` in `main.tsx`
+  läuft. Ein Gerät, das noch eine Version ohne diese Prüfung hat, muss die App
+  einmal ganz schließen; danach geht es von selbst.
